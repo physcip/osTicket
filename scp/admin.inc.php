@@ -43,7 +43,7 @@ if($ost->isUpgradePending()) {
         if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']), 'settings.php'))
             die($sysnotice);
 
-    } elseif(file_exists('../setup/')) {
+    } elseif(is_readable('../setup/')) { // we chmod 000 the setup directory
         $sysnotice=__('Please take a minute to delete <strong>setup/install</strong> directory (../setup/) for security reasons.');
     } elseif(CONFIG_FILE && file_exists(CONFIG_FILE) && is_writable(CONFIG_FILE)) {
             //Confirm for real that the file is writable by group or world.
