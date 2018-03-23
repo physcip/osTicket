@@ -52,6 +52,16 @@ if ($_POST) {
     $errors=array();
     // General attachments
     $_POST['files'] = $faq_form->getField('attachments')->getClean();
+    if (isset($_POST['attachments'])) // fix for KB losing previous attachments on edit
+    {
+        foreach ($_POST['attachments'] as $v)
+        {
+            if (!in_array($v, $_POST['files']))
+            {
+                $_POST['files'][] = $v;
+            }
+        }
+    }
     // Language-specific attachments
     if ($langs) {
         $langs[] = $cfg->getPrimaryLanguage();
