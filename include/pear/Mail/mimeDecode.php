@@ -645,7 +645,8 @@ class Mail_mimeDecode extends PEAR
         $input = preg_replace("/=\r?\n/", '', $input);
 
         // Replace encoded characters
-		$input = preg_replace('/=([a-f0-9]{2})/ie', "chr(hexdec('\\1'))", $input);
+        // fix per https://github.com/osTicket/osTicket/issues/3278
+		$input = preg_replace_callback('/=([a-f0-9]{2})/i', function($m) { return chr(hexdec($m[0])); }, $input);
 
         return $input;
     }
