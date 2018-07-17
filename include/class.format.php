@@ -306,8 +306,9 @@ class Format {
                   ':<!DOCTYPE[^>]+>:',          # <!DOCTYPE ... >
                   ':<\?[^>]+>:',                # <?xml version="1.0" ... >
                   ':<html[^>]+:i',              # drop html attributes
+                  ':<(a|span) (name|style)="(mso-bookmark\:)?_MailEndCompose">(.+)?<\/(a|span)>:', # Drop _MailEndCompose
             ),
-            array('', '', '', '', '<html'),
+            array('', '', '', '', '<html', '$4'),
             $html);
 
         // HtmLawed specific config only
@@ -321,7 +322,7 @@ class Format {
             'hook_tag' => function($e, $a=0) { return Format::__html_cleanup($e, $a); },
             'elements' => '*+iframe',
             'spec' =>
-            'iframe=-*,height,width,type,style,src(match="`^(https?:)?//(www\.)?(youtube|dailymotion|vimeo)\.com/`i"),frameborder'.($options['spec'] ? '; '.$options['spec'] : ''),
+            'iframe=-*,height,width,type,style,src(match="`^(https?:)?//(www\.)?(youtube|dailymotion|vimeo|player.vimeo)\.com/`i"),frameborder'.($options['spec'] ? '; '.$options['spec'] : ''),
         );
 
         return Format::html($html, $config);
@@ -348,8 +349,13 @@ class Format {
     function htmlchars($var, $sanitize = false) {
         static $phpversion = null;
 
-        if (is_array($var))
-            return array_map(array('Format', 'htmlchars'), $var);
+        if (is_array($var)) {
+            $result = array();
+            foreach ($var as $k => $v)
+                $result[$k] = self::htmlchars($v, $sanitize);
+
+            return $result;
+        }
 
         if ($sanitize)
             $var = Format::sanitize($var);
@@ -608,7 +614,7 @@ class Format {
         return $tz;
     }
 
-    function parseDatetime($date, $locale=null, $format=false) {
+    function parseDateTime($date, $locale=null, $format=false) {
         global $cfg;
 
         if (!$date)
