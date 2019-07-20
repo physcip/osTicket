@@ -51,7 +51,7 @@ class TicketsAjaxAPI extends AjaxController {
 
         $q = $_REQUEST['q'];
 
-        if (strlen($q) < 3)
+        if (strlen(Format::searchable($q)) < 3)
             return $this->encode(array());
 
         global $ost;
@@ -364,7 +364,7 @@ class TicketsAjaxAPI extends AjaxController {
             $format.='.plain';
 
         $varReplacer = function (&$var) use($ticket) {
-            return $ticket->replaceVars($var);
+            return $ticket->replaceVars($var, array('recipient' => $ticket->getOwner()));
         };
 
         include_once(INCLUDE_DIR.'class.canned.php');

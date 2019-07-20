@@ -1306,7 +1306,7 @@ implements TemplateVariable {
                 $vars['body'] = new TextThreadEntryBody($vars['body']);
         }
 
-        if (!($body = $vars['body']->getClean()))
+        if (!($body = Format::strip_emoticons($vars['body']->getClean())))
             $body = '-'; //Special tag used to signify empty message as stored.
 
         $poster = $vars['poster'];
@@ -1943,8 +1943,9 @@ class EditEvent extends ThreadEvent {
                 $fields[$F->id] = $F;
             }
             foreach ($data['fields'] as $id=>$f) {
-                $field = $fields[$id];
-                if ($mode == self::MODE_CLIENT && !$field->isVisibleToUsers())
+                if (!($field = $fields[$id]))
+                   continue;
+                if ($mode == self::MODE_CLIENT &&  !$field->isVisibleToUsers())
                     continue;
                 list($old, $new) = $f;
                 $impl = $field->getImpl($field);
@@ -2191,7 +2192,7 @@ class TextThreadEntryBody extends ThreadEntryBody {
     }
 
     function getClean() {
-        return  Format::htmlchars(Format::stripEmptyLines(parent::getClean()), true);
+        return Format::htmlchars(Format::html_balance(Format::stripEmptyLines(parent::getClean())));
     }
 
     function prepend($what) {

@@ -217,6 +217,8 @@ implements AuthenticatedUser, EmailContact, TemplateVariable {
     }
 
     function setPassword($new, $current=false) {
+        global $thisstaff;
+
         // Allow the backend to update the password. This is the preferred
         // method as it allows for integration with password policies and
         // also allows for remotely updating the password where possible and
@@ -240,6 +242,9 @@ implements AuthenticatedUser, EmailContact, TemplateVariable {
         $this->change_passwd = 0;
         $this->cancelResetTokens();
         $this->passwdreset = SqlFunction::NOW();
+
+        // Clean sessions
+        Signal::send('auth.clean', $this, $thisstaff);
 
         return $rv;
     }
@@ -941,8 +946,8 @@ implements AuthenticatedUser, EmailContact, TemplateVariable {
                 }
                 else {
                     throw new ImportError(sprintf(__('Unable to import (%s): %s'),
-                        $data['username'],
-                        print_r($errors, true)
+                        Format::htmlchars($data['username']),
+                        print_r(Format::htmlchars($errors), true)
                     ));
                 }
                 $imported++;

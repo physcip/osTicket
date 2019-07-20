@@ -1,3 +1,77 @@
+osTicket v1.10.6
+================
+### Enhancements
+* issue: Upgrader Wrong Guide Link (#4739)
+* iframe: Allow Multiple iFrame Domains (#4781)
+* issue: Strip Emoticons (#4523)
+
+### Improvements
+* issue: Maxfilesize Comma Crash (#4340)
+* issue: No Save Button On Quicknotes (#4706)
+* issue: PHP 7.2 Ticket Status (#4758)
+* issue: Canned Response Variables (#4759)
+* issue: FAQ Search Results (#4771)
+* issue: FAQ Return Errors (#4772)
+* issue: Duplicate Form Titles (#4788)
+* issue: Organizations Users Sort (#4806)
+* oops: Emojis Strip Korean (#4823)
+* issue: iFrame On Install (#4824)
+* issue: sendAccessLink On NULL (#4828)
+* Update README.md (eccc57a, e5f4180)
+* issue: iFrame Single Quotes (#4844)
+* issue: .eml/.msg Attachments (#4857)
+
+### Performance and Security
+* xss: XSS To LFI Vulnerability (#4869)
+* jquery: Update Again (#4858)
+
+osTicket v1.10.5
+================
+### Enhancements
+* issue: Translation Flags Not Clickable (#4687)
+* issue: Hide Task Loading Overlay (#4660)
+* Issue: Tasks Within Tickets (#4653)
+* issue: Dashboard Export Period (#4650)
+* Improve the Staff login (#4629)
+* oops: Remove DST From User Update (#4599)
+* issue: Dupe Page Requests Fix (#4568)
+* change old wiki urls to new doc urls (#4517)
+* oops: Class GenericAttachment Not Found (#4481)
+* issue: Duplicate Page Requests (#4472)
+* forms: Render Instructions (#4494)
+* accessibility: Screen Readable Actions (#4490)
+* forms: Disabled By Help Topic Users (#4476)
+* issue: CDATA Phone Contains (#4471)
+* Tasks: Task visibility (#4467)
+* issue: mPDF SetAutoFont RTL (#4466)
+* issue: SelectionField nset (#4465)
+* cron: Clean Expired Passwd Resets (#4451)
+* sessions: Clear On Password Set/Reset (#4450)
+* Make getFiles() return files (#4410)
+* issue: mPDF Arabic Fonts (#4455)
+* issue: Task Term Search (#4453)
+* Relative Time Fixes: (#4452)
+* perms: Alphabetize Role/Staff Permissions (#4439)
+* issue: Ticket Filter Does Not Match Regex (#4443)
+* Task Assigned Team Issue: (#4437)
+* issue: FAQ & Canned Attachments Dropping (#4428)
+* issue: Wrong Attachment Names (#4426, #4425)
+* issue: Featured FAQs On Disable (#4416)
+* issue: Deleted Field Thread Events (#4394)
+* issue: Custom File Upload Dropping (#4406)
+* issue: Priority Field Template Variable (#4390)
+* issue: Client Side Thread Entries (#4383)
+* Web Portal Fixes: (#4369)
+* issue: jQuery Sortable Redactor (#4381)
+* issue: CLI Deploy Missing Bootstrap Fix (#4363)
+* issue: Client Side Column Sorting (#4362)
+* issue: ChoiceField Template Variable (#4359)
+* issue: TextThreadEntryBody Sanitize (#4355)
+* issue: Installer Footer Copyright (#4351)
+
+### Performance and Security
+* Latest jQuery Upgrade (#4672)
+
 osTicket v1.10.4
 ================
 ### Enhancements
